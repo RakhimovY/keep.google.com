@@ -4,7 +4,9 @@ import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 
-const Search = styled("div")(({ theme, openInput }: any) => ({
+const Search = styled("div", {
+  shouldForwardProp: (prop) => prop !== "openInput",
+})(({ theme, openInput }: any) => ({
   position: "relative",
   display: "flex",
   borderRadius: "8px",
@@ -18,13 +20,15 @@ const Search = styled("div")(({ theme, openInput }: any) => ({
   },
 }));
 
-const SmallScreenSearch = styled(SearchIcon)(({ theme, openInput }: any) => ({
+const SmallScreenSearch = styled(SearchIcon)(({ theme }) => ({
   [theme.breakpoints.up("sm")]: {
     display: "none",
   },
 }));
 
-const SearchIconWrapper = styled("div")(({ theme, openInput }: any) => ({
+const SearchIconWrapper = styled("div", {
+  shouldForwardProp: (prop) => prop !== "openInput",
+})(({ theme, openInput }: any) => ({
   padding: theme.spacing(0, 0, 0, 2),
   height: "100%",
   position: "absolute",
@@ -37,7 +41,9 @@ const SearchIconWrapper = styled("div")(({ theme, openInput }: any) => ({
   },
 }));
 
-const StyledInputBase = styled(InputBase)(({ theme, openInput }: any) => ({
+const StyledInputBase = styled(InputBase, {
+  shouldForwardProp: (prop) => prop !== "openInput",
+})(({ theme, openInput }: any) => ({
   color: "inherit",
   display: "flex",
   padding: theme.spacing(1, 1.5, 1, 1.5),
@@ -57,7 +63,7 @@ export default function SearchBox() {
     <>
       <Box sx={{ width: "40%" }}>
         <Search>
-          <SearchIconWrapper>
+          <SearchIconWrapper openInput={openInput}>
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
@@ -66,10 +72,7 @@ export default function SearchBox() {
           />
         </Search>
       </Box>
-      <SmallScreenSearch
-        onClick={() => setOpenInput(true)}
-        {openInput}
-      />
+      <SmallScreenSearch onClick={() => setOpenInput(true)} />
     </>
   );
 }
