@@ -14,6 +14,8 @@ const openedMixin = (theme: Theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.enteringScreen,
   }),
+  border: "none",
+  backgroundColor: "#282c34",
   overflowX: "hidden",
 });
 
@@ -22,7 +24,9 @@ const closedMixin = (theme: Theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
+  backgroundColor: "#282c34",
   overflowX: "hidden",
+  border: "none",
   width: `calc(${theme.spacing(7)} + 1px)`,
   [theme.breakpoints.up("sm")]: {
     width: `calc(${theme.spacing(9)} + 1px)`,
@@ -31,13 +35,16 @@ const closedMixin = (theme: Theme) => ({
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
+  height: "75px",
 }));
 
-const Drawer = styled(MuiDrawer)(({ theme, open }): any => ({
+const Drawer = styled(MuiDrawer, {
+  shouldForwardProp: (prop) => prop !== "open",
+})(({ theme, open }: any) => ({
   width: drawerWidth,
   flexShrink: 0,
   whiteSpace: "nowrap",
-  boxSizing: "border-box",
+
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": openedMixin(theme),
@@ -49,13 +56,11 @@ const Drawer = styled(MuiDrawer)(({ theme, open }): any => ({
 }));
 
 function SwipeDrawer() {
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
 
   const handleDrawer: () => void = () => {
     setOpen((prevState) => !prevState);
   };
-
-  console.log(open);
 
   return (
     <Box sx={{ display: "flex" }}>

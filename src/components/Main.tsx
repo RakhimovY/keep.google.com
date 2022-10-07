@@ -1,5 +1,5 @@
 import React from "react";
-import SwipeDrawer from "./Drawer";
+import SwipeDrawer from "./SwipeDrawer";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Box } from "@mui/material";
 import EmptyNotes from "./notes/EmptyNotes";

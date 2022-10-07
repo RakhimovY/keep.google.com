@@ -25,10 +25,16 @@ const NavList = () => {
               color: "inherit",
             }}
           >
-            <ListItemIcon style={{ alignItems: "center" }}>
+            <ListItemIcon sx={{ alignItems: "center", color: "#fff" }}>
               {list.icon}
             </ListItemIcon>
-            <ListItemText primary={list.name} />
+            <ListItemText
+              primary={list.name}
+              sx={{
+                color: "#fff",
+                ml: "35px",
+              }}
+            />
           </Link>
         </ListItem>
       ))}

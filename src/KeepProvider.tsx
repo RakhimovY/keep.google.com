@@ -11,7 +11,7 @@ interface IState {
 
 export const KeepContext = createContext<IState | null>(null);
 
-const KeepProvider = ({ children }: any) => {
+const KeepProvider = ({ children }: { children: React.ReactNode }) => {
   const [notes, setNotes] = useState([]);
   const [archiveNotes, setAcrchiveNotes] = useState([]);
   const [deleteNotes, setDeleteNotes] = useState([]);
