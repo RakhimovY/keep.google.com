@@ -4,7 +4,7 @@ import { Typography, Box, styled } from "@mui/material";
 const Light = styled(Lightbulb)`
   font-size: 120px;
   color: #e8eaed;
-  padding: 20px
+  padding: 20px;
 `;
 
 const Text = styled(Typography)`

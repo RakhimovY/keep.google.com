@@ -2,15 +2,22 @@ import { List, ListItem, ListItemIcon, ListItemText } from "@mui/material";
 import {
   LightbulbOutlined as Lightbulb,
   ArchiveOutlined as Archive,
-  DeleteOutlineOutlined as Delete,
+  DeleteOutlined as Delete,
+  NotificationsOutlined as Notification,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 
 const NavList = () => {
   const navList = [
     { id: 1, name: "Заметки", icon: <Lightbulb />, route: "/" },
-    { id: 2, name: "Архив", icon: <Archive />, route: "/archive" },
-    { id: 3, name: "Корзина", icon: <Delete />, route: "/delete" },
+    {
+      id: 2,
+      name: "Напоминания",
+      icon: <Notification />,
+      route: "/notification",
+    },
+    { id: 3, name: "Архив", icon: <Archive />, route: "/archive" },
+    { id: 4, name: "Корзина", icon: <Delete />, route: "/delete" },
   ];
 
   return (
@@ -23,6 +30,7 @@ const NavList = () => {
               textDecoration: "none",
               display: "flex",
               color: "inherit",
+              marginLeft: "8px",
             }}
           >
             <ListItemIcon sx={{ alignItems: "center", color: "#fff" }}>
@@ -32,7 +40,7 @@ const NavList = () => {
               primary={list.name}
               sx={{
                 color: "#fff",
-                ml: "35px",
+                ml: "15px",
               }}
             />
           </Link>

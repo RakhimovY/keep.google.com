@@ -63,7 +63,7 @@ export default function SearchBox() {
     <>
       <Box sx={{ width: "40%" }}>
         <Search>
-          <SearchIconWrapper openInput={openInput}>
+          <SearchIconWrapper>
             <SearchIcon />
           </SearchIconWrapper>
           <StyledInputBase
