@@ -4,9 +4,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
 
-const Search = styled("div", {
-  shouldForwardProp: (prop) => prop !== "openInput",
-})(({ theme, openInput }: any) => ({
+const Search = styled("div")(({ theme }) => ({
   position: "relative",
   display: "flex",
   borderRadius: "8px",
@@ -15,9 +13,6 @@ const Search = styled("div", {
     backgroundColor: alpha(theme.palette.common.white, 0.25),
   },
   width: "100%",
-  [theme.breakpoints.down("sm")]: {
-    display: openInput ? "flex" : "none",
-  },
 }));
 
 const SmallScreenSearch = styled(SearchIcon)(({ theme }) => ({
@@ -26,9 +21,7 @@ const SmallScreenSearch = styled(SearchIcon)(({ theme }) => ({
   },
 }));
 
-const SearchIconWrapper = styled("div", {
-  shouldForwardProp: (prop) => prop !== "openInput",
-})(({ theme, openInput }: any) => ({
+const SearchIconWrapper = styled("div")(({ theme }) => ({
   padding: theme.spacing(0, 0, 0, 2),
   height: "100%",
   position: "absolute",
@@ -36,14 +29,9 @@ const SearchIconWrapper = styled("div", {
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  [theme.breakpoints.down("sm")]: {
-    display: openInput ? "flex" : "none",
-  },
 }));
 
-const StyledInputBase = styled(InputBase, {
-  shouldForwardProp: (prop) => prop !== "openInput",
-})(({ theme, openInput }: any) => ({
+const StyledInputBase = styled(InputBase)(({ theme }) => ({
   color: "inherit",
   display: "flex",
   padding: theme.spacing(1, 1.5, 1, 1.5),
@@ -51,14 +39,10 @@ const StyledInputBase = styled(InputBase, {
     font: "18px/30px Roboto, Arial, sans-serif",
     paddingLeft: `calc(1em + ${theme.spacing(4)})`,
   },
-  [theme.breakpoints.down("sm")]: {
-    display: openInput ? "flex" : "none",
-  },
   width: "100%",
 }));
 
 export default function SearchBox() {
-  const [openInput, setOpenInput] = React.useState(false);
   return (
     <>
       <Box sx={{ width: "40%" }}>
@@ -72,7 +56,7 @@ export default function SearchBox() {
           />
         </Search>
       </Box>
-      <SmallScreenSearch onClick={() => setOpenInput(true)} />
+      <SmallScreenSearch />
     </>
   );
 }

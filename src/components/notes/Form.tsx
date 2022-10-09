@@ -6,17 +6,20 @@ import { v4 as uuid } from "uuid";
 
 import { KeepContext } from "../../context/KeepProvider";
 
-const Container = styled(Box)`
-  display: flex;
-  flex-direction: column;
-  margin: auto;
-  box-shadow: 0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%);
-  border-color: #e0e0e0;
-  width: 600px;
-  border-radius: 8px;
-  min-height: 30px;
-  padding: 10px 15px;
-`;
+import { INode } from "../../interfaces/interfaces";
+
+const Container = styled(Box)(() => ({
+  display: "flex",
+  flexDirection: "column",
+  margin: "auto",
+  boxShadow:
+    "0 1px 2px 0 rgb(60 64 67 / 30%), 0 2px 6px 2px rgb(60 64 67 / 15%)",
+  border: "solid #fff 0.1px",
+  width: "600px",
+  borderRadius: "8px",
+  minHeight: "30px",
+  padding: "10px 15px",
+}));
 
 const note = {
   id: "",
@@ -29,25 +32,26 @@ const Form = () => {
   const [addNote, setAddNote] = useState({ ...note, id: uuid() });
 
   const { setNotes } = useContext(KeepContext);
+  console.log(addNote, setAddNote);
 
-  const containerRef = useRef();
+  const containerRef = useRef<HTMLElement>();
 
   const handleClickAway = () => {
     setShowTextField(false);
-    containerRef.current.style.minheight = "30px";
+    if (containerRef.current) containerRef.current.style.minHeight = "30px";
     setAddNote({ ...note, id: uuid() });
 
     if (addNote.heading || addNote.text) {
-      setNotes((prevArr) => [addNote, ...prevArr]);
+      setNotes((prevArr: INode[]) => [addNote, ...prevArr]);
     }
   };
 
   const onTextAreaClick = () => {
     setShowTextField(true);
-    containerRef.current.style.minheight = "70px";
+    if (containerRef.current) containerRef.current.style.minHeight = "70px";
   };
 
-  const onTextChange = (e) => {
+  const onTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     let changedNote = { ...addNote, [e.target.name]: e.target.value };
     setAddNote(changedNote);
   };
@@ -57,23 +61,23 @@ const Form = () => {
       <Container ref={containerRef}>
         {showTextField && (
           <TextField
-            placeholder="Title"
+            placeholder="Введите заголовок"
             variant="standard"
             InputProps={{ disableUnderline: true }}
             style={{ marginBottom: 10 }}
-            onChange={(e) => onTextChange(e)}
+            onChange={onTextChange}
             name="heading"
             value={addNote.heading}
           />
         )}
         <TextField
-          placeholder="Take a note..."
+          placeholder="Заметка..."
           multiline
           maxRows={Infinity}
           variant="standard"
           InputProps={{ disableUnderline: true }}
           onClick={onTextAreaClick}
-          onChange={(e) => onTextChange(e)}
+          onChange={onTextChange}
           name="text"
           value={addNote.text}
         />
