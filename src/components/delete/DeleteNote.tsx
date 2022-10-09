@@ -45,10 +45,14 @@ const DeleteNote = ({ deleteNote }: { deleteNote: INote }) => {
       <CardActions>
         <Delete
           fontSize="medium"
-          style={{ marginLeft: "auto" }}
+          style={{ marginLeft: "auto", color: "#fff" }}
           onClick={() => removeNote(deleteNote)}
         />
-        <Restore fontSize="medium" onClick={() => restoreNote(deleteNote)} />
+        <Restore
+          fontSize="medium"
+          onClick={() => restoreNote(deleteNote)}
+          style={{ color: "#fff" }}
+        />
       </CardActions>
     </StyledCard>
   );

@@ -14,7 +14,6 @@ export default function Main() {
         <SwipeDrawer />
         <Routes>
           <Route path="/" element={<Notes />} />
-          <Route path="/notification" element={<EmptyNotes />} />
           <Route path="/archive" element={<Archives />} />
           <Route path="/delete" element={<DeleteNotes />} />
         </Routes>

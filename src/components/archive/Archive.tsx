@@ -44,10 +44,14 @@ const Archive = ({ archive }: { archive: INote }) => {
       <CardActions>
         <Unarchive
           fontSize="medium"
-          style={{ marginLeft: "auto" }}
+          style={{ marginLeft: "auto", color: "#fff" }}
           onClick={() => unArchiveNote(archive)}
         />
-        <Delete fontSize="medium" onClick={() => deleteNote(archive)} />
+        <Delete
+          fontSize="medium"
+          onClick={() => deleteNote(archive)}
+          style={{ color: "#fff" }}
+        />
       </CardActions>
     </StyledCard>
   );

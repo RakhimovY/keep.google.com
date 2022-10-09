@@ -40,15 +40,19 @@ const Note = ({ note }: { note: INote }) => {
       <CardContent>
         <Typography color={"white"}>{note.heading}</Typography>
         <Typography color={"white"}>{note.text}</Typography>
-        <CardActions>
-          <Archive
-            fontSize="medium"
-            style={{ marginLeft: "auto" }}
-            onClick={() => archiveNote(note)}
-          />
-          <Delete fontSize="medium" onClick={() => deleteNote(note)} />
-        </CardActions>
       </CardContent>
+      <CardActions>
+        <Archive
+          fontSize="medium"
+          style={{ marginLeft: "auto", color: "#fff" }}
+          onClick={() => archiveNote(note)}
+        />
+        <Delete
+          fontSize="medium"
+          onClick={() => deleteNote(note)}
+          style={{ color: "#fff" }}
+        />
+      </CardActions>
     </StyledCard>
   );
 };

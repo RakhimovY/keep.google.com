@@ -10,14 +10,8 @@ import { Link } from "react-router-dom";
 const NavList = () => {
   const navList = [
     { id: 1, name: "Заметки", icon: <Lightbulb />, route: "/" },
-    {
-      id: 2,
-      name: "Напоминания",
-      icon: <Notification />,
-      route: "/notification",
-    },
-    { id: 3, name: "Архив", icon: <Archive />, route: "/archive" },
-    { id: 4, name: "Корзина", icon: <Delete />, route: "/delete" },
+    { id: 2, name: "Архив", icon: <Archive />, route: "/archive" },
+    { id: 3, name: "Корзина", icon: <Delete />, route: "/delete" },
   ];
 
   return (

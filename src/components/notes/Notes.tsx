@@ -18,12 +18,10 @@ import EmptyNotes from "./EmptyNotes";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
-  height: "75px",
 }));
 
 const Notes = () => {
   const { notes, setNotes } = useContext(KeepContext);
-  console.log(notes);
 
   const reorder = (list: INote[], startIndex: number, endIndex: number) => {
     const result = Array.from(list);
@@ -47,28 +45,29 @@ const Notes = () => {
         <Form />
         {notes.length > 0 ? (
           <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided) => (
+            <Droppable droppableId="droppable-1">
+              {(provided, snapshot) => (
                 <Grid
                   container
                   style={{ marginTop: 16 }}
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
+                  {provided.placeholder}
                   {notes.map((note, index) => (
                     <Draggable
                       key={note.id}
                       draggableId={note.id}
                       index={index}
                     >
-                      {(provided) => (
+                      {(provided, snapshot) => (
                         <Grid
                           ref={provided.innerRef}
                           {...provided.draggableProps}
                           {...provided.dragHandleProps}
-                          item
+                          key={index}
                         >
-                          <Note note={note} />
+                          <Note note={note} key={index} />
                         </Grid>
                       )}
                     </Draggable>
