@@ -10,14 +10,14 @@ import {
 import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
 
-const StyledCard = styled(Card)`
-  background-color: #282c34;
-  border: 3px solid white;
-  border-radius: 8px;
-  width: 240px;
-  margin: 8px;
-  box-shadow: none;
-`;
+const StyledCard = styled(Card)(() => ({
+  backgroundColor: "#282c34",
+  border: "1px solid white",
+  borderRadius: "8px",
+  width: "240px",
+  margin: "8px",
+  boxShadow: "none",
+}));
 
 const Note = ({ note }: { note: INote }) => {
   const { notes, setNotes, setAcrchiveNotes, setDeleteNotes } =

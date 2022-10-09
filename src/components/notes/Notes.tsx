@@ -2,7 +2,12 @@ import { useContext } from "react";
 
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import {
+  DragDropContext,
+  Draggable,
+  Droppable,
+  DropResult,
+} from "react-beautiful-dnd";
 
 import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
@@ -28,7 +33,7 @@ const Notes = () => {
     return result;
   };
 
-  const onDragEnd = (result: any) => {
+  const onDragEnd = (result: DropResult) => {
     if (!result.destination) return;
 
     const items = reorder(notes, result.source.index, result.destination.index);

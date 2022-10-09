@@ -1,12 +1,6 @@
 import { useState, useRef, useContext } from "react";
 
-import {
-  Box,
-  TextField,
-  ClickAwayListener,
-  createTheme,
-  ThemeProvider,
-} from "@mui/material";
+import { Box, TextField, ClickAwayListener } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { v4 as uuid } from "uuid";
 
@@ -38,7 +32,6 @@ const Form = () => {
   const [addNote, setAddNote] = useState({ ...note, id: uuid() });
 
   const { setNotes } = useContext(KeepContext);
-  console.log(addNote, setAddNote);
 
   const containerRef = useRef<HTMLElement>();
 
@@ -70,11 +63,11 @@ const Form = () => {
             placeholder="Введите заголовок"
             variant="standard"
             InputProps={{ disableUnderline: true }}
+            inputProps={{ style: { color: "white" } }}
             style={{ marginBottom: 10 }}
             onChange={onTextChange}
             name="heading"
             value={addNote.heading}
-            color="secondary"
           />
         )}
         <TextField
@@ -85,9 +78,9 @@ const Form = () => {
           InputProps={{ disableUnderline: true }}
           onClick={onTextAreaClick}
           onChange={onTextChange}
+          inputProps={{ style: { color: "white" } }}
           name="text"
           value={addNote.text}
-          color="secondary"
         />
       </Container>
     </ClickAwayListener>
