@@ -1,6 +1,5 @@
 import { LightbulbOutlined as Lightbulb } from "@mui/icons-material";
 import { Typography, Box, styled } from "@mui/material";
-import Form from "./Form";
 
 const Light = styled(Lightbulb)(() => ({
   fontSize: "120px",
@@ -21,14 +20,13 @@ const Container = styled(Box)(() => ({
   display: "flex",
   flexDirection: "column",
   alignItems: "center",
-  marginTop: "40vh",
+  marginTop: "20vh",
   width: "100%",
 }));
 
 const EmptyNotes = () => {
   return (
     <Container>
-      <Form />
       <Light />
       <Text>Здесь будут ваши заметки.</Text>
     </Container>

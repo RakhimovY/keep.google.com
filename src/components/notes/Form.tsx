@@ -6,7 +6,7 @@ import { v4 as uuid } from "uuid";
 
 import { KeepContext } from "../../context/KeepProvider";
 
-import { INode } from "../../interfaces/interfaces";
+import { INote } from "../../interfaces/interfaces";
 
 const Container = styled(Box)(() => ({
   display: "flex",
@@ -42,7 +42,7 @@ const Form = () => {
     setAddNote({ ...note, id: uuid() });
 
     if (addNote.heading || addNote.text) {
-      setNotes((prevArr: INode[]) => [addNote, ...prevArr]);
+      setNotes((prevArr: INote[]) => [addNote, ...prevArr]);
     }
   };
 

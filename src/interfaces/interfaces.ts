@@ -1,4 +1,4 @@
-export interface INode {
+export interface INote {
   id: string;
   heading: string;
   text: string;
