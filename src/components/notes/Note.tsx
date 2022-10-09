@@ -11,7 +11,8 @@ import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
 
 const StyledCard = styled(Card)`
-  border: 1px solid #e0e0e0;
+  background-color: #282c34;
+  border: 3px solid white;
   border-radius: 8px;
   width: 240px;
   margin: 8px;
@@ -37,8 +38,8 @@ const Note = ({ note }: { note: INote }) => {
   return (
     <StyledCard>
       <CardContent>
-        <Typography>{note.heading}</Typography>
-        <Typography>{note.text}</Typography>
+        <Typography color={"white"}>{note.heading}</Typography>
+        <Typography color={"white"}>{note.text}</Typography>
         <CardActions>
           <Archive
             fontSize="medium"

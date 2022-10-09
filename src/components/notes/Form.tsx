@@ -1,6 +1,12 @@
 import { useState, useRef, useContext } from "react";
 
-import { Box, TextField, ClickAwayListener } from "@mui/material";
+import {
+  Box,
+  TextField,
+  ClickAwayListener,
+  createTheme,
+  ThemeProvider,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { v4 as uuid } from "uuid";
 
@@ -68,6 +74,7 @@ const Form = () => {
             onChange={onTextChange}
             name="heading"
             value={addNote.heading}
+            color="secondary"
           />
         )}
         <TextField
@@ -80,6 +87,7 @@ const Form = () => {
           onChange={onTextChange}
           name="text"
           value={addNote.text}
+          color="secondary"
         />
       </Container>
     </ClickAwayListener>
