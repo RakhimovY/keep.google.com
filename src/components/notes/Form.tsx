@@ -19,6 +19,7 @@ const Container = styled(Box)(() => ({
   borderRadius: "8px",
   minHeight: "30px",
   padding: "10px 15px",
+  marginTop: "15px",
 }));
 
 const note = {

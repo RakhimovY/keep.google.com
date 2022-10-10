@@ -5,14 +5,14 @@ import { styled } from "@mui/material/styles";
 
 import { KeepContext } from "../../context/KeepProvider";
 
-import Archive from "./Archive";
+import ArchiveNote from "./ArchiveNote";
 import EmptyArchives from "./EmptyArchives";
 
 const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
-const Archives = () => {
+const ArchiveNotes = () => {
   const { archiveNotes } = useContext(KeepContext);
 
   return (
@@ -23,7 +23,7 @@ const Archives = () => {
           <Grid container>
             {archiveNotes.map((archive, index) => (
               <Grid item key={index}>
-                <Archive archive={archive} key={index} />
+                <ArchiveNote archive={archive} key={index} />
               </Grid>
             ))}
           </Grid>
@@ -35,4 +35,4 @@ const Archives = () => {
   );
 };
 
-export default Archives;
+export default ArchiveNotes;

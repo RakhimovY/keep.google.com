@@ -11,7 +11,7 @@ import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
 
 const StyledCard = styled(Card)(() => ({
-  backgroundColor: "#282c34",
+  backgroundColor: "#202124",
   border: "1px solid white",
   borderRadius: "8px",
   width: "240px",
@@ -19,7 +19,7 @@ const StyledCard = styled(Card)(() => ({
   boxShadow: "none",
 }));
 
-const Archive = ({ archive }: { archive: INote }) => {
+const ArchiveNote = ({ archive }: { archive: INote }) => {
   const { archiveNotes, setNotes, setAcrchiveNotes, setDeleteNotes } =
     useContext(KeepContext);
 
@@ -44,17 +44,17 @@ const Archive = ({ archive }: { archive: INote }) => {
       <CardActions>
         <Unarchive
           fontSize="medium"
-          style={{ marginLeft: "auto", color: "#fff" }}
+          style={{ marginLeft: "auto", color: "#fff", cursor: "pointer" }}
           onClick={() => unArchiveNote(archive)}
         />
         <Delete
           fontSize="medium"
           onClick={() => deleteNote(archive)}
-          style={{ color: "#fff" }}
+          style={{ color: "#fff", cursor: "pointer" }}
         />
       </CardActions>
     </StyledCard>
   );
 };
 
-export default Archive;
+export default ArchiveNote;

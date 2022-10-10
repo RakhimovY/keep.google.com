@@ -15,7 +15,7 @@ const openedMixin = (theme: Theme) => ({
     duration: theme.transitions.duration.enteringScreen,
   }),
   border: "none",
-  backgroundColor: "#282c34",
+  backgroundColor: "#202124",
   overflowX: "hidden",
 });
 
@@ -24,7 +24,7 @@ const closedMixin = (theme: Theme) => ({
     easing: theme.transitions.easing.sharp,
     duration: theme.transitions.duration.leavingScreen,
   }),
-  backgroundColor: "#282c34",
+  backgroundColor: "#202124",
   overflowX: "hidden",
   border: "none",
   width: `calc(${theme.spacing(7)} + 1px)`,

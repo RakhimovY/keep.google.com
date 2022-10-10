@@ -10,7 +10,7 @@ import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
 
 const StyledCard = styled(Card)(() => ({
-  backgroundColor: "#282c34",
+  backgroundColor: "#202124",
   border: "1px solid white",
   borderRadius: "8px",
   width: "240px",
@@ -45,13 +45,13 @@ const DeleteNote = ({ deleteNote }: { deleteNote: INote }) => {
       <CardActions>
         <Delete
           fontSize="medium"
-          style={{ marginLeft: "auto", color: "#fff" }}
+          style={{ marginLeft: "auto", color: "#fff", cursor: "pointer" }}
           onClick={() => removeNote(deleteNote)}
         />
         <Restore
           fontSize="medium"
           onClick={() => restoreNote(deleteNote)}
-          style={{ color: "#fff" }}
+          style={{ color: "#fff", cursor: "pointer" }}
         />
       </CardActions>
     </StyledCard>

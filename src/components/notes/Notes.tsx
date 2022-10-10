@@ -38,7 +38,7 @@ const Notes = () => {
     setNotes(items);
   };
 
-  const list = useMemo(() => {
+  const notesList = useMemo(() => {
     return notes.filter(
       (notes) =>
         search === "" ||
@@ -63,7 +63,7 @@ const Notes = () => {
                   ref={provided.innerRef}
                 >
                   {provided.placeholder}
-                  {list.map((note, index) => (
+                  {notesList.map((note, index) => (
                     <Draggable
                       key={note.id}
                       draggableId={note.id}
