@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useContext } from "react";
 import { styled, alpha } from "@mui/material/styles";
 import SearchIcon from "@mui/icons-material/Search";
 import Box from "@mui/material/Box";
 import InputBase from "@mui/material/InputBase";
+import { KeepContext } from "../context/KeepProvider";
 
 const Search = styled("div")(({ theme }) => ({
   position: "relative",
@@ -43,6 +44,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function SearchBox() {
+  const { search, setSearch } = useContext(KeepContext);
+
+  const handleChanger = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
+    setSearch(e.target.value);
+  };
   return (
     <>
       <Box sx={{ width: "40%" }}>
@@ -53,6 +61,8 @@ export default function SearchBox() {
           <StyledInputBase
             placeholder="Поиск"
             inputProps={{ "aria-label": "search" }}
+            value={search}
+            onChange={handleChanger}
           />
         </Search>
       </Box>

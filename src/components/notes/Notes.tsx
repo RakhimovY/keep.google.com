@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useMemo } from "react";
 
 import { Box, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
@@ -21,7 +21,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 }));
 
 const Notes = () => {
-  const { notes, setNotes } = useContext(KeepContext);
+  const { notes, setNotes, search } = useContext(KeepContext);
 
   const reorder = (list: INote[], startIndex: number, endIndex: number) => {
     const result = Array.from(list);
@@ -37,6 +37,15 @@ const Notes = () => {
     const items = reorder(notes, result.source.index, result.destination.index);
     setNotes(items);
   };
+
+  const list = useMemo(() => {
+    return notes.filter(
+      (notes) =>
+        search === "" ||
+        notes.heading.toLowerCase().includes(search.toLowerCase()) ||
+        notes.text.toLowerCase().includes(search.toLowerCase())
+    );
+  }, [search, notes]);
 
   return (
     <Box sx={{ display: "flex", width: "100%" }}>
@@ -54,7 +63,7 @@ const Notes = () => {
                   ref={provided.innerRef}
                 >
                   {provided.placeholder}
-                  {notes.map((note, index) => (
+                  {list.map((note, index) => (
                     <Draggable
                       key={note.id}
                       draggableId={note.id}

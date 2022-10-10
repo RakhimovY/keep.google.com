@@ -7,6 +7,8 @@ interface IState {
   setAcrchiveNotes: Dispatch<SetStateAction<INote[] | []>>;
   deleteNotes: INote[] | [];
   setDeleteNotes: Dispatch<SetStateAction<INote[] | []>>;
+  search: string;
+  setSearch: Dispatch<SetStateAction<string>>;
 }
 
 export const KeepContext = createContext<IState>({} as IState);
@@ -15,6 +17,7 @@ const KeepProvider = ({ children }: { children: React.ReactNode }) => {
   const [notes, setNotes] = useState<INote[] | []>([]);
   const [archiveNotes, setAcrchiveNotes] = useState<INote[] | []>([]);
   const [deleteNotes, setDeleteNotes] = useState<INote[] | []>([]);
+  const [search, setSearch] = useState<string>("");
 
   return (
     <KeepContext.Provider
@@ -25,6 +28,8 @@ const KeepProvider = ({ children }: { children: React.ReactNode }) => {
         setAcrchiveNotes,
         deleteNotes,
         setDeleteNotes,
+        search,
+        setSearch,
       }}
     >
       {children}
