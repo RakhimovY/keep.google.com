@@ -3,7 +3,6 @@ import {
   LightbulbOutlined as Lightbulb,
   ArchiveOutlined as Archive,
   DeleteOutlined as Delete,
-  NotificationsOutlined as Notification,
 } from "@mui/icons-material";
 import { Link } from "react-router-dom";
 

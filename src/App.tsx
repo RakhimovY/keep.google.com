@@ -2,11 +2,14 @@ import React from "react";
 import "./App.css";
 import Main from "./components/Main";
 import KeepProvider from "./context/KeepProvider";
+import { SnackbarProvider } from "notistack";
 function App() {
   return (
-    <KeepProvider>
-      <Main />
-    </KeepProvider>
+    <SnackbarProvider maxSnack={4}>
+      <KeepProvider>
+        <Main />
+      </KeepProvider>
+    </SnackbarProvider>
   );
 }
 
