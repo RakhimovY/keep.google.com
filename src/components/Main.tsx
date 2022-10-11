@@ -6,6 +6,7 @@ import Notes from "./notes/Notes";
 import ArchiveNotes from "./archive/ArchiveNotes";
 import DeleteNotes from "./delete/DeleteNotes";
 
+
 export default function Main() {
   return (
     <Box style={{ display: "flex", width: "100%" }}>

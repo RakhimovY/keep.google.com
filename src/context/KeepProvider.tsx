@@ -9,10 +9,6 @@ interface IState {
   setDeleteNotes: Dispatch<SetStateAction<INote[] | []>>;
   search: string;
   setSearch: Dispatch<SetStateAction<string>>;
-  place: string;
-  setPlace: Dispatch<SetStateAction<string>>;
-  open: boolean;
-  setOpen: Dispatch<SetStateAction<boolean>>;
 }
 
 export const KeepContext = createContext<IState>({} as IState);
@@ -22,8 +18,7 @@ const KeepProvider = ({ children }: { children: React.ReactNode }) => {
   const [archiveNotes, setAcrchiveNotes] = useState<INote[] | []>([]);
   const [deleteNotes, setDeleteNotes] = useState<INote[] | []>([]);
   const [search, setSearch] = useState<string>("");
-  const [place, setPlace] = useState<string>("");
-  const [open, setOpen] = useState(false);
+
   return (
     <KeepContext.Provider
       value={{
@@ -35,10 +30,6 @@ const KeepProvider = ({ children }: { children: React.ReactNode }) => {
         setDeleteNotes,
         search,
         setSearch,
-        place,
-        setPlace,
-        open,
-        setOpen,
       }}
     >
       {children}

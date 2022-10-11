@@ -62,7 +62,14 @@ const Note = ({ note }: { note: INote }) => {
         ),
       });
     },
-    [enqueueSnackbar, closeSnackbar, setNotes, setAcrchiveNotes, notes]
+    [
+      enqueueSnackbar,
+      closeSnackbar,
+      setNotes,
+      setAcrchiveNotes,
+      notes,
+      archiveNotes,
+    ]
   );
   const deleteNote = useCallback(
     (note: INote) => {
@@ -88,7 +95,14 @@ const Note = ({ note }: { note: INote }) => {
         ),
       });
     },
-    [enqueueSnackbar, closeSnackbar, setNotes, setAcrchiveNotes, notes]
+    [
+      enqueueSnackbar,
+      closeSnackbar,
+      setNotes,
+      setDeleteNotes,
+      notes,
+      deleteNotes,
+    ]
   );
 
   return (

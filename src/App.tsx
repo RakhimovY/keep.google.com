@@ -5,7 +5,7 @@ import KeepProvider from "./context/KeepProvider";
 import { SnackbarProvider } from "notistack";
 function App() {
   return (
-    <SnackbarProvider maxSnack={4}>
+    <SnackbarProvider maxSnack={3}>
       <KeepProvider>
         <Main />
       </KeepProvider>

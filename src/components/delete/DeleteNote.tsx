@@ -1,11 +1,19 @@
 import { useContext } from "react";
 
-import { Card, CardContent, CardActions, Typography } from "@mui/material";
+import {
+  Card,
+  CardContent,
+  CardActions,
+  Typography,
+  Button,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 import {
   RestoreFromTrashOutlined as Restore,
   DeleteForeverOutlined as Delete,
 } from "@mui/icons-material";
+import { useSnackbar } from "notistack";
+
 import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
 
@@ -18,8 +26,15 @@ const StyledCard = styled(Card)(() => ({
   boxShadow: "none",
 }));
 
-const DeleteNote = ({ deleteNote }: { deleteNote: INote }) => {
+interface Props {
+  deleteNote: INote;
+  handleRemove: (contact: INote) => void;
+}
+
+const DeleteNote: React.FC<Props> = ({ deleteNote, handleRemove }) => {
   const { deleteNotes, setNotes, setDeleteNotes } = useContext(KeepContext);
+
+  const { enqueueSnackbar, closeSnackbar } = useSnackbar();
 
   const restoreNote = (deleteNote: INote) => {
     const updatedNotes = deleteNotes.filter(
@@ -27,13 +42,24 @@ const DeleteNote = ({ deleteNote }: { deleteNote: INote }) => {
     );
     setDeleteNotes(updatedNotes);
     setNotes((prevArr) => [deleteNote, ...prevArr]);
-  };
 
-  const removeNote = (deleteNote: INote) => {
-    const updatedNotes = deleteNotes.filter(
-      (data) => data.id !== deleteNote.id
-    );
-    setDeleteNotes(updatedNotes);
+    enqueueSnackbar("Заметка восстановлена", {
+      action: (key) => (
+        <Button
+          onClick={() => {
+            const restoreNote = deleteNotes.filter(
+              (data) => data.id !== deleteNote.id
+            );
+            setDeleteNotes((prevArr) => [deleteNote, ...prevArr]);
+            setNotes(restoreNote);
+
+            closeSnackbar(key);
+          }}
+        >
+          Отменить
+        </Button>
+      ),
+    });
   };
 
   return (
@@ -46,7 +72,7 @@ const DeleteNote = ({ deleteNote }: { deleteNote: INote }) => {
         <Delete
           fontSize="medium"
           style={{ marginLeft: "auto", color: "#fff", cursor: "pointer" }}
-          onClick={() => removeNote(deleteNote)}
+          onClick={() => handleRemove(deleteNote)}
         />
         <Restore
           fontSize="medium"

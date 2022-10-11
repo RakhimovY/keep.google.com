@@ -5,6 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
+import { useLocation } from "react-router-dom";
 import Searcher from "./SearchBox";
 
 type IMenu = {
@@ -28,6 +29,11 @@ const Bar = styled(Toolbar)(({ theme }): any => ({
 }));
 
 export default function Menu({ handleDrawer }: IMenu) {
+  let location = useLocation();
+  const NotePage = location.pathname === "/";
+  const ArchivePage = location.pathname === "/archive";
+  const DeletePage = location.pathname === "/delete";
+
   const logo =
     "https://seeklogo.com/images/G/google-keep-logo-0BC92EBBBD-seeklogo.com.png";
 
@@ -47,17 +53,55 @@ export default function Menu({ handleDrawer }: IMenu) {
               <MenuIcon />
             </IconButton>
           </Box>
-          <img src={logo} alt="logo" style={{ width: 30 }} />
-          <Typography
-            sx={{
-              m: 2,
-              fontFamily: "Product Sans, Arial, sans-serif",
-              fontSize: "22px",
-              mr: 13,
-            }}
-          >
-            Keep
-          </Typography>
+          <Box display="flex" width="10%" justifyContent="left" my="auto">
+            {NotePage && (
+              <>
+                <img
+                  src={logo}
+                  alt="logo"
+                  style={{
+                    width: 30,
+                    marginBlock: "auto",
+                  }}
+                />
+                <Typography
+                  sx={{
+                    m: 2,
+                    fontFamily: "Product Sans, Arial, sans-serif",
+                    fontSize: "22px",
+                  }}
+                >
+                  Keep
+                </Typography>
+              </>
+            )}
+            {ArchivePage && (
+              <>
+                <Typography
+                  sx={{
+                    m: 2,
+                    fontFamily: "Product Sans, Arial, sans-serif",
+                    fontSize: "22px",
+                  }}
+                >
+                  Архив
+                </Typography>
+              </>
+            )}
+            {DeletePage && (
+              <>
+                <Typography
+                  sx={{
+                    m: 2,
+                    fontFamily: "Product Sans, Arial, sans-serif",
+                    fontSize: "22px",
+                  }}
+                >
+                  Корзина
+                </Typography>
+              </>
+            )}
+          </Box>
           <Searcher />
         </Bar>
       </Header>
