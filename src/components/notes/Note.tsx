@@ -26,7 +26,13 @@ const StyledCard = styled(Card)(() => ({
   boxShadow: "none",
 }));
 
-const Note = ({ note }: { note: INote }) => {
+const Note = ({
+  note,
+  handleOpenDialog,
+}: {
+  note: INote;
+  handleOpenDialog: (note: INote) => void;
+}) => {
   const {
     notes,
     archiveNotes,
@@ -62,14 +68,7 @@ const Note = ({ note }: { note: INote }) => {
         ),
       });
     },
-    [
-      enqueueSnackbar,
-      closeSnackbar,
-      setNotes,
-      setAcrchiveNotes,
-      notes,
-      archiveNotes,
-    ]
+    [enqueueSnackbar, closeSnackbar, setNotes, setAcrchiveNotes, archiveNotes]
   );
   const deleteNote = useCallback(
     (note: INote) => {
@@ -95,19 +94,12 @@ const Note = ({ note }: { note: INote }) => {
         ),
       });
     },
-    [
-      enqueueSnackbar,
-      closeSnackbar,
-      setNotes,
-      setDeleteNotes,
-      notes,
-      deleteNotes,
-    ]
+    [enqueueSnackbar, closeSnackbar, setNotes, setDeleteNotes, deleteNotes]
   );
 
   return (
     <StyledCard>
-      <CardContent>
+      <CardContent onClick={() => handleOpenDialog(note)}>
         <Typography color={"white"}>{note.heading}</Typography>
         <Typography color={"white"}>{note.text}</Typography>
       </CardContent>

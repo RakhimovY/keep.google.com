@@ -17,18 +17,18 @@ const DrawerHeader = styled("div")(({ theme }) => ({
 const DeleteNotes = () => {
   const { deleteNotes, setDeleteNotes } = useContext(KeepContext);
   const [openDelConfirm, setOpenDelConfirm] = useState(false);
-  const currentContactRef = useRef<INote[]>();
+  const currentNoteRef = useRef<INote[]>();
 
   const handleRemove = () => {
     setOpenDelConfirm(false);
-    if (currentContactRef.current) setDeleteNotes(currentContactRef.current);
+    if (currentNoteRef.current) setDeleteNotes(currentNoteRef.current);
   };
 
   const closeDelConfirm = () => setOpenDelConfirm(false);
 
   const onRemove = (deleteNote: INote) => {
     setOpenDelConfirm(true);
-    currentContactRef.current = deleteNotes.filter(
+    currentNoteRef.current = deleteNotes.filter(
       (data) => data.id !== deleteNote.id
     );
   };
