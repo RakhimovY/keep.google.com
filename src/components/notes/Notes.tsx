@@ -55,6 +55,11 @@ const Notes = () => {
     setOpenDialog(true);
   };
 
+  const handleCancel = () => {
+    setOpenDialog(false);
+    currentNoteRef.current = undefined;
+  };
+
   return (
     <Box sx={{ display: "flex", width: "100%" }}>
       <Box sx={{ p: 3, width: "100%" }}>
@@ -74,7 +79,7 @@ const Notes = () => {
                   <EditNote
                     show={openDialog}
                     note={currentNoteRef.current}
-                    handleCancel={() => setOpenDialog(false)}
+                    handleCancel={handleCancel}
                   />
                   {notesList.map((note, index) => (
                     <Draggable

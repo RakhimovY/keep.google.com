@@ -15,7 +15,7 @@ import { KeepContext } from "../../context/KeepProvider";
 import { INote } from "../../interfaces/interfaces";
 
 import { TransitionProps } from "@mui/material/transitions";
-import React, { FC, useCallback, useContext } from "react";
+import React, { FC, useCallback, useContext, useEffect, useState } from "react";
 import { useSnackbar } from "notistack";
 import { Box } from "@mui/system";
 
@@ -58,7 +58,11 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
     heading: "",
   };
 
-  console.log(note);
+  const [changeNote, setChangeNote] = useState(initialNote);
+
+  useEffect(() => {
+    if (note) setChangeNote(note);
+  }, [note]);
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const archiveNote = useCallback(
@@ -66,6 +70,7 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
       const updatedNotes = notes.filter((data) => data.id !== note.id);
       setNotes(updatedNotes);
       setAcrchiveNotes((prevArr: INote[]) => [note, ...prevArr]);
+      handleCancel();
 
       enqueueSnackbar("Заметка добавлена в архив", {
         action: (key) => (
@@ -85,13 +90,22 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
         ),
       });
     },
-    [enqueueSnackbar, closeSnackbar, setNotes, setAcrchiveNotes, archiveNotes]
+    [
+      notes,
+      enqueueSnackbar,
+      closeSnackbar,
+      setNotes,
+      setAcrchiveNotes,
+      handleCancel,
+      archiveNotes,
+    ]
   );
   const deleteNote = useCallback(
     (note: INote) => {
       const updatedNotes = notes.filter((data) => data.id !== note.id);
       setNotes(updatedNotes);
       setDeleteNotes((prevArr: INote[]) => [note, ...prevArr]);
+      handleCancel();
 
       enqueueSnackbar("Заметка перемещена в корзину", {
         action: (key) => (
@@ -111,8 +125,24 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
         ),
       });
     },
-    [enqueueSnackbar, closeSnackbar, setNotes, setDeleteNotes, deleteNotes]
+    [
+      notes,
+      enqueueSnackbar,
+      closeSnackbar,
+      setNotes,
+      setDeleteNotes,
+      handleCancel,
+      deleteNotes,
+    ]
   );
+  const handleHeading = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChangeNote((prevState) => ({ ...prevState, heading: e.target.value }));
+  };
+
+  const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChangeNote((prevState) => ({ ...prevState, text: e.target.value }));
+  };
+
   return (
     <Dialog
       open={show}
@@ -124,14 +154,14 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
       <Box
         sx={{
           backgroundColor: "#202124",
-          color: "white",
+          color: "#202124",
         }}
       >
         <DialogContent dividers>
           <TextField
             InputProps={{ disableUnderline: true }}
-            value={note?.heading}
-            // onChange={}
+            value={changeNote?.heading}
+            onChange={handleHeading}
             multiline
             autoFocus
             fullWidth
@@ -141,8 +171,8 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
 
           <TextField
             InputProps={{ disableUnderline: true }}
-            value={note?.text}
-            // onChange={}
+            value={changeNote?.text}
+            onChange={handleText}
             multiline
             autoFocus
             fullWidth
@@ -152,13 +182,13 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
         </DialogContent>
         <DialogActions sx={{ justifyContent: "flex-start" }}>
           <Archive
-            fontSize="medium"
+            fontSize="large"
             style={{ marginLeft: "auto", color: "#fff", cursor: "pointer" }}
-            onClick={() => archiveNote(note ?? initialNote)}
+            onClick={() => archiveNote(changeNote)}
           />
           <Delete
-            fontSize="medium"
-            onClick={() => deleteNote(note ?? initialNote)}
+            fontSize="large"
+            onClick={() => deleteNote(changeNote)}
             style={{ color: "#fff", cursor: "pointer" }}
           />
         </DialogActions>
