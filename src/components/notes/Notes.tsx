@@ -47,7 +47,6 @@ const Notes = () => {
   }, [search, notes]);
 
   const currentNoteRef = useRef<INote>();
-
   const [openDialog, setOpenDialog] = useState(false);
 
   const handleOpenDialog = (note: INote) => {
@@ -98,6 +97,7 @@ const Notes = () => {
                             note={note}
                             key={index}
                             handleOpenDialog={handleOpenDialog}
+                            openDialog={openDialog}
                           />
                         </Grid>
                       )}

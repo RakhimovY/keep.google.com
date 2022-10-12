@@ -66,10 +66,10 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
 
   const { enqueueSnackbar, closeSnackbar } = useSnackbar();
   const archiveNote = useCallback(
-    (note: INote) => {
-      const updatedNotes = notes.filter((data) => data.id !== note.id);
+    (changeNote: INote) => {
+      const updatedNotes = notes.filter((data) => data.id !== changeNote.id);
       setNotes(updatedNotes);
-      setAcrchiveNotes((prevArr: INote[]) => [note, ...prevArr]);
+      setAcrchiveNotes((prevArr: INote[]) => [changeNote, ...prevArr]);
       handleCancel();
 
       enqueueSnackbar("Заметка добавлена в архив", {
@@ -77,9 +77,9 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
           <Button
             onClick={() => {
               const updatedAcrchive = archiveNotes.filter(
-                (data) => data.id !== note.id
+                (data) => data.id !== changeNote.id
               );
-              setNotes((prevArr: INote[]) => [note, ...prevArr]);
+              setNotes((prevArr: INote[]) => [changeNote, ...prevArr]);
               setAcrchiveNotes(updatedAcrchive);
 
               closeSnackbar(key);
@@ -101,10 +101,10 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
     ]
   );
   const deleteNote = useCallback(
-    (note: INote) => {
-      const updatedNotes = notes.filter((data) => data.id !== note.id);
+    (changeNote: INote) => {
+      const updatedNotes = notes.filter((data) => data.id !== changeNote.id);
       setNotes(updatedNotes);
-      setDeleteNotes((prevArr: INote[]) => [note, ...prevArr]);
+      setDeleteNotes((prevArr: INote[]) => [changeNote, ...prevArr]);
       handleCancel();
 
       enqueueSnackbar("Заметка перемещена в корзину", {
@@ -112,9 +112,9 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
           <Button
             onClick={() => {
               const updatedDelete = deleteNotes.filter(
-                (data) => data.id !== note.id
+                (data) => data.id !== changeNote.id
               );
-              setNotes((prevArr: INote[]) => [note, ...prevArr]);
+              setNotes((prevArr: INote[]) => [changeNote, ...prevArr]);
               setDeleteNotes(updatedDelete);
 
               closeSnackbar(key);
@@ -137,10 +137,24 @@ const EditNote: FC<Props> = ({ show, note, handleCancel }) => {
   );
   const handleHeading = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChangeNote((prevState) => ({ ...prevState, heading: e.target.value }));
+    const noteIndex = notes.findIndex((index) => index.id === changeNote.id);
+    const changedNotes = [
+      ...notes.slice(0, noteIndex),
+      changeNote,
+      ...notes.slice(noteIndex + 1),
+    ];
+    setNotes(changedNotes);
   };
 
   const handleText = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChangeNote((prevState) => ({ ...prevState, text: e.target.value }));
+    const noteIndex = notes.findIndex((index) => index.id === changeNote.id);
+    const changedNotes = [
+      ...notes.slice(0, noteIndex),
+      changeNote,
+      ...notes.slice(noteIndex + 1),
+    ];
+    setNotes(changedNotes);
   };
 
   return (

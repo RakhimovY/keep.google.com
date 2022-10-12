@@ -15,7 +15,7 @@ import {
 import { useSnackbar } from "notistack";
 
 import { KeepContext } from "../../context/KeepProvider";
-import { INote } from "../../interfaces/interfaces";
+import { INote, INoteFunc } from "../../interfaces/interfaces";
 
 const StyledCard = styled(Card)(() => ({
   backgroundColor: "#202124",
@@ -26,13 +26,7 @@ const StyledCard = styled(Card)(() => ({
   boxShadow: "none",
 }));
 
-const Note = ({
-  note,
-  handleOpenDialog,
-}: {
-  note: INote;
-  handleOpenDialog: (note: INote) => void;
-}) => {
+const Note = ({ note, handleOpenDialog, openDialog }: INoteFunc) => {
   const {
     notes,
     archiveNotes,
