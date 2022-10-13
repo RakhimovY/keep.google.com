@@ -10,11 +10,17 @@ import { Box } from "@mui/material";
 
 interface Props {
   open: boolean;
+  deleteAll: boolean;
   onRemove: () => void;
   onCancel: () => void;
 }
 
-const DelConfirm: React.FC<Props> = ({ open, onRemove, onCancel }) => {
+const DelConfirm: React.FC<Props> = ({
+  open,
+  deleteAll,
+  onRemove,
+  onCancel,
+}) => {
   const theme = useTheme();
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -25,23 +31,36 @@ const DelConfirm: React.FC<Props> = ({ open, onRemove, onCancel }) => {
         open={open}
         onClose={onCancel}
         aria-labelledby="responsive-dialog-title"
-        sx={{ borderRadius: "30px" }}
       >
         <Box
           sx={{
-            backgroundColor: "#202124",
+            backgroundColor: "#313235",
             color: "white",
           }}
         >
-          <DialogTitle id="responsive-dialog-title">
-            Удалить заметку навсегда?
+          <DialogTitle
+            id="responsive-dialog-title"
+            sx={{
+              letterSpacing: ".01428571em",
+              fontFamily: "Roboto,Arial,sans-serif",
+              fontSize: ".875rem",
+              fontWeight: "400",
+              lineHeight: "1.25rem",
+              color: "#e8eaed",
+              paddingBottom: "24px",
+              wordWrap: "break-word",
+            }}
+          >
+            {deleteAll
+              ? "Очистить корзину? Заметки будут удалены навсегда."
+              : "Удалить заметку навсегда?"}
           </DialogTitle>
           <DialogActions>
             <Button autoFocus onClick={onCancel} sx={{ color: "white" }}>
               Отмена
             </Button>
             <Button onClick={onRemove} autoFocus>
-              Удалить
+              {deleteAll ? "Очистить" : "Удалить"}
             </Button>
           </DialogActions>
         </Box>
